@@ -89,18 +89,17 @@ var SHEETS = {
 
 function installAfriqaPortal() {
   var props = PropertiesService.getScriptProperties();
-  var deployerEmail = Session.getEffectiveUser().getEmail();
   props.setProperties(
     {
       SPREADSHEET_ID: INSTALL_DEFAULTS.spreadsheetId,
       UPLOAD_FOLDER_ID: INSTALL_DEFAULTS.uploadFolderId,
-      ADMIN_EMAILS: deployerEmail || props.getProperty("ADMIN_EMAILS") || ""
+      ADMIN_EMAILS: props.getProperty("ADMIN_EMAILS") || ""
     },
     false
   );
   CONFIG.spreadsheetId = INSTALL_DEFAULTS.spreadsheetId;
   CONFIG.uploadFolderId = INSTALL_DEFAULTS.uploadFolderId;
-  CONFIG.adminEmails = String(deployerEmail || props.getProperty("ADMIN_EMAILS") || "")
+  CONFIG.adminEmails = String(props.getProperty("ADMIN_EMAILS") || "")
     .split(",")
     .map(function (email) {
       return email.trim().toLowerCase();
@@ -110,7 +109,7 @@ function installAfriqaPortal() {
   Logger.log("AfriQA portal database installed.");
   Logger.log("SPREADSHEET_ID: " + INSTALL_DEFAULTS.spreadsheetId);
   Logger.log("UPLOAD_FOLDER_ID: " + INSTALL_DEFAULTS.uploadFolderId);
-  Logger.log("ADMIN_EMAILS: " + (deployerEmail || props.getProperty("ADMIN_EMAILS") || "Set this manually in Project Settings."));
+  Logger.log("ADMIN_EMAILS: " + (props.getProperty("ADMIN_EMAILS") || "Set this manually in Project Settings."));
 }
 
 function doGet() {

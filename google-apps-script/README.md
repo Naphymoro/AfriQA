@@ -27,13 +27,11 @@ The Sheet has already been seeded with `Users`, `Sessions`, `Applications`,
 
 ## 3. Install with your Google account
 
-Run `installAfriqaPortal()` once from the Apps Script editor. Approve the
-requested permissions when Google asks. This uses your signed-in Google account
-as the deployer, writes the Sheet and Drive IDs into Script Properties, and
-repairs the database tabs.
-
-If Apps Script cannot read your deployer email automatically, open Project
-Settings > Script Properties and set `ADMIN_EMAILS` manually to your own email.
+Open Project Settings > Script Properties and set `ADMIN_EMAILS` to your own
+Google account email first. Then run `installAfriqaPortal()` once from the Apps
+Script editor and approve the requested permissions when Google asks. This uses
+your signed-in Google account as the deployer, writes the Sheet and Drive IDs
+into Script Properties, and repairs the database tabs.
 
 The required properties are:
 
