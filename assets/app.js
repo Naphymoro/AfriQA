@@ -2,7 +2,7 @@
   "use strict";
 
   var APP_CONFIG = {
-    appsScriptUrl: "PASTE_DEPLOYED_APPS_SCRIPT_WEB_APP_URL_HERE",
+    appsScriptUrl: "https://script.google.com/macros/s/AKfycbws-NWcwenRceDayw5JcHZLcO2kh-nq-E53U-Ivnb0eyfUYtvMfTRtF_fec6yvhT8Kf/exec",
     storageKey: "afriqa-2026-portal-state"
   };
 
