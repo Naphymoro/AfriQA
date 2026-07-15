@@ -3,7 +3,7 @@ window.CONFERENCE_DATA = {
     name: "Quantum Science & Technology Across Africa",
     shortName: "AfriQA 2026",
     dates: "30 November - 4 December 2026",
-    venue: "AIMS Rwanda Innovation Centre (AIMS RIC), Kigali, Rwanda",
+    venue: "AIMS Research Innovation Centre (AIMS RIC), Kigali, Rwanda",
     address: "Kicukiro District, Kicukiro Sector, Gasharu Cell, KN 3 Road, Kigali, Rwanda",
     timezone: "Africa/Kigali",
     sourceNotes: [

@@ -351,6 +351,20 @@ h3 {
   transform: translateY(-1px);
 }
 
+.button:disabled,
+.button[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button:disabled:hover,
+.button:disabled:focus-visible,
+.button[aria-disabled="true"]:hover,
+.button[aria-disabled="true"]:focus-visible {
+  transform: none;
+}
+
 .button.primary {
   background: var(--red);
   color: white;
@@ -1004,6 +1018,21 @@ h3 {
   margin-right: auto;
 }
 
+.portal-notice {
+  border: 1px solid rgba(159, 47, 36, 0.22);
+  border-radius: 8px;
+  background: rgba(159, 47, 36, 0.08);
+  color: var(--red-strong);
+  padding: 0.9rem 1rem;
+  font-weight: 780;
+}
+
+.portal-notice.is-online {
+  border-color: rgba(30, 111, 120, 0.22);
+  background: rgba(30, 111, 120, 0.1);
+  color: var(--teal);
+}
+
 .portal-grid {
   display: grid;
   grid-template-columns: 230px minmax(0, 1fr);
@@ -1080,6 +1109,13 @@ h3 {
 .form-grid .full,
 .form-actions {
   grid-column: 1 / -1;
+}
+
+.field-note {
+  margin: -0.55rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  font-weight: 700;
 }
 
 .progress-grid {

@@ -6,7 +6,7 @@
     <title>AfriQA 2026 | Quantum Science & Technology Across Africa</title>
     <meta
       name="description"
-      content="A modern conference website and integrated application portal for AfriQA 2026, Quantum Science and Technology Across Africa, hosted at AIMS Research and Innovation Centre in Kigali."
+      content="A modern conference website and integrated application portal for AfriQA 2026, Quantum Science and Technology Across Africa, hosted at AIMS Research Innovation Centre in Kigali."
     />
     <meta name="theme-color" content="#9f2f24" />
     <meta property="og:title" content="AfriQA 2026 | Quantum Science & Technology Across Africa" />
@@ -126,7 +126,7 @@
           <p>
             AfriQA 2026 convenes leading researchers, academics, emerging scientists, and
             partners across the African continent to strengthen collaboration and advance
-            quantum research. The conference is hosted at the AIMS Rwanda Innovation Centre
+            quantum research. The conference is hosted at the AIMS Research Innovation Centre
             in Kigali and includes a summer school, tutorials, research highlights, poster
             sessions, project breakouts, and stakeholder engagement.
           </p>
@@ -249,7 +249,7 @@
           </article>
           <article>
             <h3>Host institution</h3>
-            <p>AIMS Rwanda Innovation Centre, Kigali, Rwanda.</p>
+            <p>AIMS Research Innovation Centre, Kigali, Rwanda.</p>
           </article>
           <article>
             <h3>Programme and review</h3>
@@ -263,10 +263,14 @@
           <p class="eyebrow">Application and registration portal</p>
           <h2>Register, submit abstracts, upload documents, and track your status.</h2>
           <p>
-            This is configured as a production portal. Add the deployed Google Apps Script Web App
-            URL in <code>assets/app.js</code> before opening registration, so submissions are saved
-            directly to Google Sheets and uploads go to Google Drive.
+            The portal is prepared for the production application workflow. Once registration opens,
+            submissions will be saved to the secure conference database and uploads will be routed
+            to the organising team.
           </p>
+          <div class="portal-notice" data-endpoint-notice role="status">
+            Registration is being prepared by the organising team. Please check back once the secure
+            submission system is active.
+          </div>
         </div>
 
         <div class="portal-grid">
@@ -287,21 +291,22 @@
                   <p class="eyebrow">Secure account</p>
                   <h3 id="account-title">User registration and authentication</h3>
                 </div>
-                <span class="status-pill" data-auth-state>Production endpoint required</span>
+                <span class="status-pill" data-auth-state>Registration opening soon</span>
               </div>
-              <form id="account-form" class="form-grid">
+              <form id="account-form" class="form-grid" autocomplete="off">
                 <label>
                   Full name
                   <input name="name" autocomplete="name" required placeholder="Your full name" />
                 </label>
                 <label>
                   Email address
-                  <input name="email" type="email" autocomplete="email" required placeholder="name@example.org" />
+                  <input name="email" type="email" autocomplete="off" inputmode="email" autocapitalize="none" spellcheck="false" required placeholder="name@example.org" data-lpignore="true" data-1p-ignore />
                 </label>
                 <label>
                   Password
                   <input name="password" type="password" autocomplete="new-password" minlength="8" required placeholder="Minimum 8 characters" />
                 </label>
+                <p class="field-note full">This password is only for the AfriQA applicant dashboard.</p>
                 <label>
                   Institution
                   <input name="institution" required placeholder="University, institute, company, or agency" />
@@ -322,7 +327,7 @@
                   <input name="country" required placeholder="Country of residence" />
                 </label>
                 <div class="form-actions">
-                  <button class="button primary" type="submit" data-account-submit>Create or update account</button>
+                  <button class="button primary" type="submit" data-account-submit data-requires-endpoint>Create account</button>
                 </div>
               </form>
             </section>
@@ -395,8 +400,8 @@
                   <textarea name="contribution" rows="4" placeholder="Briefly describe your research, project, or collaboration interest."></textarea>
                 </label>
                 <div class="form-actions">
-                  <button class="button secondary" type="button" data-save-draft="registration-form">Save draft</button>
-                  <button class="button primary" type="submit">Submit registration</button>
+                  <button class="button secondary" type="button" data-save-draft="registration-form" data-requires-endpoint>Save draft</button>
+                  <button class="button primary" type="submit" data-requires-endpoint>Submit registration</button>
                 </div>
               </form>
             </section>
@@ -436,8 +441,8 @@
                   <textarea name="coauthors" rows="3" placeholder="Name, affiliation, country"></textarea>
                 </label>
                 <div class="form-actions">
-                  <button class="button secondary" type="button" data-save-draft="abstract-form">Save draft</button>
-                  <button class="button primary" type="submit">Submit abstract</button>
+                  <button class="button secondary" type="button" data-save-draft="abstract-form" data-requires-endpoint>Save draft</button>
+                  <button class="button primary" type="submit" data-requires-endpoint>Submit abstract</button>
                 </div>
               </form>
             </section>
@@ -472,8 +477,8 @@
                   <textarea name="funding" rows="3" placeholder="List confirmed or pending funding."></textarea>
                 </label>
                 <div class="form-actions">
-                  <button class="button secondary" type="button" data-save-draft="support-form">Save draft</button>
-                  <button class="button primary" type="submit">Submit support request</button>
+                  <button class="button secondary" type="button" data-save-draft="support-form" data-requires-endpoint>Save draft</button>
+                  <button class="button primary" type="submit" data-requires-endpoint>Submit support request</button>
                 </div>
               </form>
             </section>
@@ -502,7 +507,7 @@
                   <span>Choose a file or drop it here</span>
                   <small>PDF, DOCX, PNG, or JPG. Recommended maximum: 10 MB.</small>
                 </label>
-                <button class="button primary" type="submit">Upload document</button>
+                <button class="button primary" type="submit" data-requires-endpoint>Upload document</button>
               </form>
               <ul class="uploaded-list" data-uploaded-list></ul>
             </section>
@@ -513,7 +518,7 @@
                   <p class="eyebrow">Administrative review portal</p>
                   <h3 id="admin-title">Search, review, export, and notify</h3>
                 </div>
-                <button class="button secondary" type="button" data-export-csv>Export CSV</button>
+                <button class="button secondary" type="button" data-export-csv data-requires-endpoint>Export CSV</button>
               </div>
               <div class="admin-tools">
                 <label>
@@ -558,7 +563,7 @@
       <section id="venue" class="section info-grid-section">
         <div class="section-heading">
           <p class="eyebrow">Venue and logistics</p>
-          <h2>AIMS Rwanda Innovation Centre, Kigali.</h2>
+          <h2>AIMS Research Innovation Centre, Kigali.</h2>
         </div>
         <div class="info-grid">
           <article id="travel">
@@ -600,7 +605,7 @@
         <div class="faq-list">
           <details>
             <summary>Can I save my application and return later?</summary>
-            <p>Yes. Drafts are saved through Apps Script into the Google Sheet database when the production endpoint is configured.</p>
+            <p>Yes. Drafts are saved through the secure application system once registration is open.</p>
           </details>
           <details>
             <summary>How are files handled?</summary>
@@ -626,20 +631,20 @@
             by AfriQA is Prof Thomas Konrad.
           </p>
         </div>
-        <form class="contact-card" aria-label="Contact form preview">
+        <form class="contact-card" aria-label="Contact form" data-contact-form>
           <label>
             Name
-            <input placeholder="Your name" />
+            <input name="name" autocomplete="name" required placeholder="Your name" />
           </label>
           <label>
             Email
-            <input type="email" placeholder="name@example.org" />
+            <input name="email" type="email" autocomplete="off" inputmode="email" autocapitalize="none" spellcheck="false" required placeholder="name@example.org" />
           </label>
           <label>
             Message
-            <textarea rows="4" placeholder="How can the conference team help?"></textarea>
+            <textarea name="message" rows="4" required placeholder="How can the conference team help?"></textarea>
           </label>
-          <button class="button primary" type="button">Prepare email</button>
+          <button class="button primary" type="submit">Prepare email</button>
         </form>
       </section>
     </main>

@@ -5,6 +5,8 @@
     appsScriptUrl: "https://script.google.com/macros/s/AKfycbws-NWcwenRceDayw5JcHZLcO2kh-nq-E53U-Ivnb0eyfUYtvMfTRtF_fec6yvhT8Kf/exec",
     storageKey: "afriqa-2026-portal-state"
   };
+  var ENDPOINT_PENDING_MESSAGE =
+    "Registration is not open yet. The secure application system is being connected by the organising team.";
 
   var data = window.CONFERENCE_DATA;
   var state = loadState();
@@ -86,7 +88,7 @@
 
   async function apiRequest(action, payload) {
     if (!isEndpointConfigured()) {
-      throw new Error("Production endpoint is not configured. Paste the deployed Apps Script Web App URL into assets/app.js.");
+      throw new Error(ENDPOINT_PENDING_MESSAGE);
     }
 
     var response = await fetch(APP_CONFIG.appsScriptUrl, {
@@ -108,6 +110,27 @@
 
   function isEndpointConfigured() {
     return /^https:\/\/script\.google\.com\/macros\/s\//.test(APP_CONFIG.appsScriptUrl);
+  }
+
+  function updateEndpointAvailability() {
+    var configured = isEndpointConfigured();
+    var notice = qs("[data-endpoint-notice]");
+    if (notice) {
+      notice.textContent = configured
+        ? "Secure registration is online. Applicants can create accounts and submit materials."
+        : ENDPOINT_PENDING_MESSAGE;
+      notice.classList.toggle("is-online", configured);
+    }
+
+    qsa("[data-requires-endpoint]").forEach(function (control) {
+      control.disabled = !configured;
+      control.setAttribute("aria-disabled", String(!configured));
+      if (configured) {
+        control.removeAttribute("title");
+      } else {
+        control.title = ENDPOINT_PENDING_MESSAGE;
+      }
+    });
   }
 
   function setupNavigation() {
@@ -361,6 +384,10 @@
 
     accountForm.addEventListener("submit", async function (event) {
       event.preventDefault();
+      if (!isEndpointConfigured()) {
+        notify(ENDPOINT_PENDING_MESSAGE);
+        return;
+      }
       var values = serialiseForm(accountForm);
       try {
         var result = await apiRequest("registerUser", values);
@@ -383,6 +410,10 @@
 
     qsa("[data-save-draft]").forEach(function (button) {
       button.addEventListener("click", function () {
+        if (!isEndpointConfigured()) {
+          notify(ENDPOINT_PENDING_MESSAGE);
+          return;
+        }
         var form = qs("#" + button.dataset.saveDraft);
         var key = form.id.replace("-form", "");
         if (key === "support") key = "support";
@@ -402,6 +433,10 @@
 
     uploadForm.addEventListener("submit", async function (event) {
       event.preventDefault();
+      if (!isEndpointConfigured()) {
+        notify(ENDPOINT_PENDING_MESSAGE);
+        return;
+      }
       var fileInput = qs('input[type="file"]', uploadForm);
       var file = fileInput.files[0];
       if (!file) {
@@ -433,6 +468,10 @@
   function handleNamedSubmit(action, form, key, successTitle) {
     return async function (event) {
       event.preventDefault();
+      if (!isEndpointConfigured()) {
+        notify(ENDPOINT_PENDING_MESSAGE);
+        return;
+      }
       var values = serialiseForm(form);
       try {
         await apiRequest(action, values);
@@ -464,8 +503,8 @@
       auth.textContent = isEndpointConfigured()
         ? state.account
           ? "Signed in"
-          : "Production online"
-        : "Production endpoint required";
+          : "Registration online"
+        : "Registration opening soon";
     }
 
     setText("[data-progress-account]", percentComplete(state.account || {}, ["name", "email", "institution", "country"]) + "%");
@@ -476,7 +515,15 @@
     if (timeline) {
       var events = state.events.length
         ? state.events
-        : [{ title: "Not started", detail: "Create an account to begin the production application workflow.", date: "" }];
+        : [
+            {
+              title: isEndpointConfigured() ? "Not started" : "Registration opening soon",
+              detail: isEndpointConfigured()
+                ? "Create an account to begin the production application workflow."
+                : "The organising team is connecting the secure submission system.",
+              date: ""
+            }
+          ];
       timeline.innerHTML = events
         .map(function (event) {
           return (
@@ -560,12 +607,43 @@
         });
     });
 
-    if (state.sessionToken) {
+    if (!isEndpointConfigured()) {
+      renderAdminMessage("Admin review opens after the secure submission system is connected.");
+    } else if (state.sessionToken) {
       loadRows();
     } else {
       renderAdminMessage("Sign in with an admin email to search applicants, update statuses, and export CSV.");
     }
     window.refreshAdminRows = loadRows;
+  }
+
+  function setupContactForm() {
+    var form = qs("[data-contact-form]");
+    if (!form) return;
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      var values = serialiseForm(form);
+      var recipient = form.dataset.contactRecipient || "";
+      var subject = "AfriQA 2026 enquiry from " + values.name;
+      var body = [
+        "Name: " + values.name,
+        "Email: " + values.email,
+        "",
+        values.message
+      ].join("\n");
+
+      window.location.href =
+        "mailto:" +
+        encodeURIComponent(recipient) +
+        "?subject=" +
+        encodeURIComponent(subject) +
+        "&body=" +
+        encodeURIComponent(body);
+      notify("Email draft prepared in your mail app.");
+    });
   }
 
   function renderAdminMessage(message) {
@@ -681,8 +759,10 @@
     renderSpeakers();
     setupPortalTabs();
     setupForms();
+    updateEndpointAvailability();
     renderDashboard();
     renderUploads();
     setupAdmin();
+    setupContactForm();
   });
 })();

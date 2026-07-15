@@ -2,7 +2,7 @@
 
 Design, develop, and deploy a production-ready conference website and integrated
 application portal for **AfriQA 2026: Quantum Science & Technology Across
-Africa**, hosted at the AIMS Rwanda Innovation Centre in Kigali, Rwanda from
+Africa**, hosted at the AIMS Research Innovation Centre in Kigali, Rwanda from
 30 November to 4 December 2026.
 
 The website must feel like a flagship scientific conference experience:
