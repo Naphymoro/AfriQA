@@ -10,7 +10,7 @@
  * - UPLOAD_FOLDER_ID: Google Drive folder id for applicant files
  * - ADMIN_EMAILS: comma-separated admin emails
  * - PORTAL_URL: public GitHub Pages portal URL
- * - MAIL_FROM_ALIAS: optional verified Gmail alias, for example afriqa@aimsric.org
+ * - MAIL_FROM_ALIAS: optional verified Gmail alias, for example academicoffice@aimsric.org
  * - MAIL_REPLY_TO: reply-to address, for example academicoffice@aimsric.org
  */
 
@@ -18,7 +18,6 @@ var INSTALL_DEFAULTS = {
   spreadsheetId: "11L63X0S7ulgu8-fAKztx4h8Awn69seew3oD32rVIm6k",
   uploadFolderId: "1_wQXNC22JrldZRbxg7t2j5LdWcE4jxc5",
   portalUrl: "https://aims-research-and-innovation-centre.github.io/AfriQA/#portal",
-  // mailFromAlias: "afriqa@aimsric.org",
   mailFromAlias: "academicoffice@aimsric.org",
   mailReplyTo: "academicoffice@aimsric.org",
   mailSenderName: "AfriQA 2026 Academic Office"

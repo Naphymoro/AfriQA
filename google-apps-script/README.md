@@ -41,17 +41,17 @@ The required properties are:
 | `UPLOAD_FOLDER_ID` | `1_wQXNC22JrldZRbxg7t2j5LdWcE4jxc5` |
 | `ADMIN_EMAILS` | Your Google account email, or comma-separated admin emails |
 | `PORTAL_URL` | `https://aims-research-and-innovation-centre.github.io/AfriQA/#portal` |
-| `MAIL_FROM_ALIAS` | `afriqa@aimsric.org` if this is a verified Gmail alias for the deploying account |
+| `MAIL_FROM_ALIAS` | `academicoffice@aimsric.org` if this is a verified Gmail alias for the deploying account |
 | `MAIL_REPLY_TO` | `academicoffice@aimsric.org` |
 | `MAIL_SENDER_NAME` | `AfriQA 2026 Academic Office` |
 
 ## 4. Email sender setup
 
 Google does not allow an Apps Script Web App to spoof any sender address. The
-true sender can be `afriqa@aimsric.org` only if one of these is true:
+true sender can be `academicoffice@aimsric.org` only if one of these is true:
 
-1. The Apps Script project is owned and deployed by `afriqa@aimsric.org`.
-2. `afriqa@aimsric.org` is configured in Gmail as a verified "Send mail as"
+1. The Apps Script project is owned and deployed by `academicoffice@aimsric.org`.
+2. `academicoffice@aimsric.org` is configured in Gmail as a verified "Send mail as"
    alias for the account that deploys the script.
 
 The code checks `GmailApp.getAliases()` and uses `MAIL_FROM_ALIAS` only when
